@@ -58,6 +58,6 @@ public class Piece {
     
     // This method will be overridden in the subclasses
     public boolean isLegalMove(Chess1 chess, int xPos, int yPos) {        
-        return false;
+        return true;
     }
 }
