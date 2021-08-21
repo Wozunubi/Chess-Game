@@ -19,8 +19,6 @@ public class Chess1 extends javax.swing.JFrame {
     public ArrayList<Piece> whitePlayer = new ArrayList<Piece>();
     public ArrayList<Piece> blackPlayer = new ArrayList<Piece>();
     
-    public Pair start = new Pair(1, 2);
-    
     // Hashmap for converting string to JButton
     public HashMap<String, JButton> stringToJButton = new HashMap<String, JButton>();
     
