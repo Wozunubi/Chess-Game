@@ -21,7 +21,7 @@ public class Knight extends Piece {
     }
     
     @Override
-    public boolean isLegalMove(Chess1 chess, int xPos, int yPos) {
+    public boolean isLegalMove(Chess1 chess, int xPos, int yPos) { 
         // If the target position is not a legal move then return false
 
         // set a 2 dimesional array for all possible knight moves
@@ -30,12 +30,9 @@ public class Knight extends Piece {
         //iterate throught the legalKnightMoves array to check if the desired move is legal
         for (int[] z : legalKnightMoves) {
             if ((x + z[0] == xPos) && (y + z[1] == yPos)) {
-                System.out.println("legal");
                 return true;
             }
         }
-                
-        System.out.println("illegal");
-        return true;
+        return false;
     } 
 }
