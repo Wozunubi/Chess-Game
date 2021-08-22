@@ -74,14 +74,14 @@ public class Chess1 extends javax.swing.JFrame {
         whitePlayer.add(new Pawn(8, 2, false, whitePawn));
         
         // Adds the black player's pawns
-        blackPlayer.add(new Pawn(1, 2, true, blackPawn));
-        blackPlayer.add(new Pawn(2, 2, true, blackPawn));
-        blackPlayer.add(new Pawn(3, 2, false, blackPawn));
-        blackPlayer.add(new Pawn(4, 2, false, blackPawn));
-        blackPlayer.add(new Pawn(5, 2, true, blackPawn));
-        blackPlayer.add(new Pawn(6, 2, true, blackPawn));
-        blackPlayer.add(new Pawn(7, 2, false, blackPawn));
-        blackPlayer.add(new Pawn(8, 2, false, blackPawn));
+        blackPlayer.add(new Pawn(1, 7, true, blackPawn));
+        blackPlayer.add(new Pawn(2, 7, true, blackPawn));
+        blackPlayer.add(new Pawn(3, 7, false, blackPawn));
+        blackPlayer.add(new Pawn(4, 7, false, blackPawn));
+        blackPlayer.add(new Pawn(5, 7, true, blackPawn));
+        blackPlayer.add(new Pawn(6, 7, true, blackPawn));
+        blackPlayer.add(new Pawn(7, 7, false, blackPawn));
+        blackPlayer.add(new Pawn(8, 7, false, blackPawn));
     }
     
     /**
