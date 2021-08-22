@@ -36,6 +36,7 @@ public class Chess1 extends javax.swing.JFrame {
     ImageIcon blackKing = new ImageIcon("black king.png");
     ImageIcon blackPawn = new ImageIcon("black pawn.png");
     
+    // Used for user click logic
     Piece selectedPiece;
     int clickCount = 0, turnCount = 0;
     
@@ -46,39 +47,8 @@ public class Chess1 extends javax.swing.JFrame {
         // GUI
         initComponents();
         
+        // Initializes hashmap
         mapStringToJButton();
-        
-        // Adds the rooks to the white and black player
-        whitePlayer.add(new Rook(1, 1, true, whiteRook));
-        whitePlayer.add(new Rook(8, 1, true, whiteRook));
-        blackPlayer.add(new Rook(1, 8, false, blackRook));
-        blackPlayer.add(new Rook(8, 8, false, blackRook));
-        
-        // Adds the knight to the white and black player
-        whitePlayer.add(new Knight(2, 1, true, whiteKnight));
-        whitePlayer.add(new Knight(7, 1, true, whiteKnight));
-        blackPlayer.add(new Knight(2, 8, false, blackKnight));
-        blackPlayer.add(new Knight(7, 8, false, blackKnight));
-        
-        // Adds the bishops to the white and black player
-        whitePlayer.add(new Bishop(3, 1, true, whiteBishop));
-        whitePlayer.add(new Bishop(6, 1, true, whiteBishop));
-        blackPlayer.add(new Bishop(3, 8, false, blackBishop));
-        blackPlayer.add(new Bishop(6, 8, false, blackBishop));
-        
-        // Adds the queens to the white and black player
-        whitePlayer.add(new Queen(4, 1, true, whiteQueen));
-        blackPlayer.add(new Queen(4, 8, false, blackQueen));
-        
-        // Adds the kingss to the white and black player
-        whitePlayer.add(new King(5, 1, true, whiteKing));
-        blackPlayer.add(new King(5, 8, false, blackKing));
-        
-        // Add the pawns to the white and black player
-        for (int i = 1; i <= 8; i++) {
-            whitePlayer.add(new Pawn(i, 2, true, whitePawn));
-            blackPlayer.add(new Pawn(i, 7, true, blackPawn));
-        }
     }
     
     /**
@@ -948,7 +918,48 @@ public class Chess1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-       updateBoard();
+        // Resets counters
+        clickCount = 0;
+        turnCount = 0;
+
+        // Clears white and black pieces
+        whitePlayer.clear();
+        blackPlayer.clear();
+
+        // Adds the rooks to the white and black player
+        whitePlayer.add(new Rook(1, 1, true, whiteRook));
+        whitePlayer.add(new Rook(8, 1, true, whiteRook));
+        blackPlayer.add(new Rook(1, 8, false, blackRook));
+        blackPlayer.add(new Rook(8, 8, false, blackRook));
+        
+        // Adds the knight to the white and black player
+        whitePlayer.add(new Knight(2, 1, true, whiteKnight));
+        whitePlayer.add(new Knight(7, 1, true, whiteKnight));
+        blackPlayer.add(new Knight(2, 8, false, blackKnight));
+        blackPlayer.add(new Knight(7, 8, false, blackKnight));
+        
+        // Adds the bishops to the white and black player
+        whitePlayer.add(new Bishop(3, 1, true, whiteBishop));
+        whitePlayer.add(new Bishop(6, 1, true, whiteBishop));
+        blackPlayer.add(new Bishop(3, 8, false, blackBishop));
+        blackPlayer.add(new Bishop(6, 8, false, blackBishop));
+        
+        // Adds the queens to the white and black player
+        whitePlayer.add(new Queen(4, 1, true, whiteQueen));
+        blackPlayer.add(new Queen(4, 8, false, blackQueen));
+        
+        // Adds the kingss to the white and black player
+        whitePlayer.add(new King(5, 1, true, whiteKing));
+        blackPlayer.add(new King(5, 8, false, blackKing));
+        
+        // Add the pawns to the white and black player
+        for (int i = 1; i <= 8; i++) {
+            whitePlayer.add(new Pawn(i, 2, true, whitePawn));
+            blackPlayer.add(new Pawn(i, 7, true, blackPawn));
+        }
+        
+        // Updates board
+        updateBoard();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void A1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A1ActionPerformed
@@ -1207,48 +1218,78 @@ public class Chess1 extends javax.swing.JFrame {
         tilePressed(8, 8);
     }//GEN-LAST:event_H8ActionPerformed
     
-    public void tilePressed(int x, int y) {        
+    public void tilePressed(int x, int y) {      
+        // Resets output
+        txtOutput.setText("");
+        
+        // Increments click counter
         clickCount++;
         
+        // If clicks is equal to 1
         if (clickCount == 1) {
-            //selectedPiece = null;
-            
+            // Set selectedPiece to null
+            selectedPiece = null;
+
+            // Check if turn count is even or odd
             if (turnCount%2 == 0) {
+                // Loop through all white pieces
                 for (Piece z : whitePlayer){
+                    // Check if a piece in the array is the same as the one selected
                     if (z.getX() == x && z.getY() == y) {
+                        // Assigns selectedPiece to the piece choosen by the user
                         selectedPiece = z;
                         System.out.println(z.getX() + " " + z.getY());
                         break;
                     }
                 }
             } else {
+                // Loop through all black pieces
                 for (Piece z : blackPlayer){
+                    // Check if a piece in the array is the same as the one selected
                     if (z.getX() == x && z.getY() == y) {
+                        // Assigns selectedPiece to the piece choosen by the user
                         selectedPiece = z;
                         System.out.println(z.getX() + " " + z.getY());
                         break;
                     }
                 }
             }
-        } else if (clickCount == 2 && selectedPiece != null && selectedPiece.isLegalMove(this, x, y)) {
+            
+            // If no piece has been selected or found
+            if (selectedPiece == null) {
+                // Output an error
+                txtOutput.setText("--Error: Select the correct colour piece first, and not an empty tile!");
+                clickCount = 0; // Reset clicks to 0
+            }
+        } else if (clickCount == 2 /*&& selectedPiece.isLegalMove(this, x, y)*/) { // If clicks is equal to 2
+            // Checks if the second tile choosen is the same as the first
             if (selectedPiece.getX() != x || selectedPiece.getY() != y) {
+                // Update new x and y position of the piece
                 selectedPiece.setX(x);
                 selectedPiece.setY(y);
 
+                // Updates board
                 updateBoard();
 
+                // Increments turn
                 turnCount++;
+                
+                // Resets clicks to 0
                 clickCount = 0;
             } else {
+                // Output an error
                 txtOutput.setText("--Error: This piece was clicked twice, please try again!");
+                clickCount = 0; // Reset clicks to 0
             }
         }
     }
     
     // Updates board
     public void updateBoard() {
+        // Loops through all coordinates
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
+                // Resets button to an empty icon
                 stringToJButton.get("" + (char)(i+64) + (j)).setIcon(null);
             }
         }
