@@ -55,10 +55,12 @@ public class Chess1 extends javax.swing.JFrame {
         blackPlayer.add(new Rook(8, 8, false, blackRook));
         
         // Adds the rooks to the white and black player
+        /*
         whitePlayer.add(new Knight(2, 1, true, whiteKnight));
         whitePlayer.add(new Knight(7, 1, true, whiteKnight));
         blackPlayer.add(new Knight(2, 8, false, blackKnight));
         blackPlayer.add(new Knight(7, 8, false, blackKnight));
+        */
         
         // Other pieces
         
