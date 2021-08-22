@@ -955,7 +955,7 @@ public class Chess1 extends javax.swing.JFrame {
         // Add the pawns to the white and black player
         for (int i = 1; i <= 8; i++) {
             whitePlayer.add(new Pawn(i, 2, true, whitePawn));
-            blackPlayer.add(new Pawn(i, 7, true, blackPawn));
+            blackPlayer.add(new Pawn(i, 7, false, blackPawn));
         }
         
         // Updates board
@@ -1264,6 +1264,25 @@ public class Chess1 extends javax.swing.JFrame {
         } else if (clickCount == 2 /*&& selectedPiece.isLegalMove(this, x, y)*/) { // If clicks is equal to 2
             // Checks if the second tile choosen is the same as the first
             if (selectedPiece.getX() != x || selectedPiece.getY() != y) {
+                
+                if (!selectedPiece.getIsWhite()) {
+                    for (Piece z : whitePlayer) {
+                        if (z.getX() == x && z.getY() == y) {
+                            System.out.println("asdf");
+                            whitePlayer.remove(z);
+                            break;
+                        }
+                    }
+                } else {
+                    for (Piece z : blackPlayer) {
+                        if (z.getX() == x && z.getY() == y) {
+                            blackPlayer.remove(z);
+                            System.out.println("gfds");
+                            break;
+                        }
+                    }
+                }
+                
                 // Update new x and y position of the piece
                 selectedPiece.setX(x);
                 selectedPiece.setY(y);
