@@ -1233,7 +1233,7 @@ public class Chess1 extends javax.swing.JFrame {
                     }
                 }
             }
-        } else if (clickCount == 2 && selectedPiece != null /*&& selectedPiece.isLegalMove(this, x, y)*/) {
+        } else if (clickCount == 2 && selectedPiece != null && selectedPiece.isLegalMove(this, x, y)) {
             if (selectedPiece.getX() != x || selectedPiece.getY() != y) {
                 selectedPiece.setX(x);
                 selectedPiece.setY(y);
