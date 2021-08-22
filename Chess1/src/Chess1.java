@@ -60,7 +60,17 @@ public class Chess1 extends javax.swing.JFrame {
         blackPlayer.add(new Knight(2, 8, false, blackKnight));
         blackPlayer.add(new Knight(7, 8, false, blackKnight));
         
-        // Other pieces
+        // Adds the bishops to the white and black player
+        whitePlayer.add(new Bishop(3, 1, true, whiteBishop));
+        whitePlayer.add(new Bishop(6, 1, true, whiteBishop));
+        blackPlayer.add(new Bishop(3, 8, false, blackBishop));
+        blackPlayer.add(new Bishop(6, 8, false, blackBishop));
+        
+        // Adds the queens to the white and black player
+        whitePlayer.add(new Queen(4, 1, true, whiteQueen));
+        blackPlayer.add(new Queen(4, 8, false, blackQueen));
+        
+        // Adds the kingss to the white and black player
         
         
         // Adds the white player's pawns
