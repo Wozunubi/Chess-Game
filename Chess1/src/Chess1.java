@@ -1300,6 +1300,8 @@ public class Chess1 extends javax.swing.JFrame {
                 txtOutput.setText("--Error: This piece was clicked twice, please try again!");
                 clickCount = 0; // Reset clicks to 0
             }
+        } else {
+            clickCount = 0;
         }
     }
     
