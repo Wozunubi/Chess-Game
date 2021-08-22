@@ -82,11 +82,12 @@ public class Pawn extends Piece {
                 
                 return true; // Returns legal move as true
             }
-
+//***************************************white cant capture but black can*******************************
+//*****************************other than capturing the opposite colour the logic works*****************
             // If the pawn wants to move forward one space diagonally
             if (Math.abs(this.x - xPos) == 1 &&
                 (yPos - this.y) == 1 &&
-                isOccupied && !z.isWhite) { // and the space is being occupied by a black piece 
+                isOccupied == true && z.isWhite == false) { // and the space is being occupied by a black piece 
                 
                 return true; // Capture the black piece
             }	
@@ -114,7 +115,7 @@ public class Pawn extends Piece {
             // If the pawn wants to move forward one space diagonally
             if (Math.abs(this.x - xPos) == 1 &&
                 (this.y - yPos) == 1 &&
-                isOccupied && z.isWhite) { // and the space is being occupied by a white piece
+                isOccupied == true && z.isWhite == true) { // and the space is being occupied by a white piece
                 
                 return true; // Capture the white piece
             }	
