@@ -16,11 +16,11 @@ import javax.swing.JButton;
 public class Chess1 extends javax.swing.JFrame {
 
     // Declares two ArrayLists for storing the white and black pieces
-    public ArrayList<Piece> whitePlayer = new ArrayList<Piece>();
-    public ArrayList<Piece> blackPlayer = new ArrayList<Piece>();
+    public ArrayList<Piece> whitePlayer = new ArrayList();
+    public ArrayList<Piece> blackPlayer = new ArrayList();
     
     // Hashmap for converting string to JButton
-    public HashMap<String, JButton> stringToJButton = new HashMap<String, JButton>();
+    public HashMap<String, JButton> stringToJButton = new HashMap();
     
     // Declaring objects to store each piece image
     ImageIcon whiteRook = new ImageIcon("white rook.png");
@@ -54,7 +54,34 @@ public class Chess1 extends javax.swing.JFrame {
         blackPlayer.add(new Rook(1, 8, false, blackRook));
         blackPlayer.add(new Rook(8, 8, false, blackRook));
         
+        // Adds the knight to the white and black player
+        whitePlayer.add(new Knight(2, 1, true, whiteKnight));
+        whitePlayer.add(new Knight(7, 1, true, whiteKnight));
+        blackPlayer.add(new Knight(2, 8, false, blackKnight));
+        blackPlayer.add(new Knight(7, 8, false, blackKnight));
+        
         // Other pieces
+        
+        
+        // Adds the white player's pawns
+        whitePlayer.add(new Pawn(1, 2, true, whitePawn));
+        whitePlayer.add(new Pawn(2, 2, true, whitePawn));
+        whitePlayer.add(new Pawn(3, 2, false, whitePawn));
+        whitePlayer.add(new Pawn(4, 2, false, whitePawn));
+        whitePlayer.add(new Pawn(5, 2, true, whitePawn));
+        whitePlayer.add(new Pawn(6, 2, true, whitePawn));
+        whitePlayer.add(new Pawn(7, 2, false, whitePawn));
+        whitePlayer.add(new Pawn(8, 2, false, whitePawn));
+        
+        // Adds the black player's pawns
+        blackPlayer.add(new Pawn(1, 2, true, blackPawn));
+        blackPlayer.add(new Pawn(2, 2, true, blackPawn));
+        blackPlayer.add(new Pawn(3, 2, false, blackPawn));
+        blackPlayer.add(new Pawn(4, 2, false, blackPawn));
+        blackPlayer.add(new Pawn(5, 2, true, blackPawn));
+        blackPlayer.add(new Pawn(6, 2, true, blackPawn));
+        blackPlayer.add(new Pawn(7, 2, false, blackPawn));
+        blackPlayer.add(new Pawn(8, 2, false, blackPawn));
     }
     
     /**
