@@ -73,25 +73,11 @@ public class Chess1 extends javax.swing.JFrame {
         // Adds the kingss to the white and black player
         
         
-        // Adds the white player's pawns
-        whitePlayer.add(new Pawn(1, 2, true, whitePawn));
-        whitePlayer.add(new Pawn(2, 2, true, whitePawn));
-        whitePlayer.add(new Pawn(3, 2, false, whitePawn));
-        whitePlayer.add(new Pawn(4, 2, false, whitePawn));
-        whitePlayer.add(new Pawn(5, 2, true, whitePawn));
-        whitePlayer.add(new Pawn(6, 2, true, whitePawn));
-        whitePlayer.add(new Pawn(7, 2, false, whitePawn));
-        whitePlayer.add(new Pawn(8, 2, false, whitePawn));
-        
-        // Adds the black player's pawns
-        blackPlayer.add(new Pawn(1, 7, true, blackPawn));
-        blackPlayer.add(new Pawn(2, 7, true, blackPawn));
-        blackPlayer.add(new Pawn(3, 7, false, blackPawn));
-        blackPlayer.add(new Pawn(4, 7, false, blackPawn));
-        blackPlayer.add(new Pawn(5, 7, true, blackPawn));
-        blackPlayer.add(new Pawn(6, 7, true, blackPawn));
-        blackPlayer.add(new Pawn(7, 7, false, blackPawn));
-        blackPlayer.add(new Pawn(8, 7, false, blackPawn));
+        // Add the pawns to the white and black player
+        for (int i = 1; i <= 8; i++) {
+            whitePlayer.add(new Pawn(i, 2, true, whitePawn));
+            blackPlayer.add(new Pawn(i, 7, true, blackPawn));
+        }
     }
     
     /**
