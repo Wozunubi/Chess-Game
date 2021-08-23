@@ -24,46 +24,32 @@ public class Knight extends Piece {
     public boolean isLegalMove(Chess1 chess, int xPos, int yPos) { 
         // If the target position is not a legal move then return false
         
-        /*
+        
         // set a 2 dimesional array for all possible knight moves
         int[][] legalKnightMoves = new int[][] {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
         
         //iterate throught the legalKnightMoves array to check if the desired move is legal
-        for (int[] z : legalKnightMoves) {
-            if ((x + z[0] == xPos) && (y + z[1] == yPos)) {
+        for (int[] w : legalKnightMoves) {
+            if ((x + w[0] == xPos) && (y + w[1] == yPos)) {
+                // Loops through the white pieces
+                for (Piece z : chess.whitePlayer){
+                
+                    // If the target position has another piece of the same colour on it, return false
+                    if ((z.getX() == xPos && z.getY() == yPos) && this.getIsWhite()) {
+                        return false;
+                    }
+                }
+            
+                // Loops through the black pieces
+                for (Piece z : chess.blackPlayer){
+                
+                    // If the target position has another piece of the same colour on it, return false
+                    if ((z.getX() == xPos && z.getY() == yPos) && !this.getIsWhite()) {
+                        return false;
+                    }
+                }
                 return true;
             }
-        }*/
-
-        
-        if ((x - xPos == 1 && y - yPos == 2) ||
-            (x - xPos == 1 && y - yPos == -2) ||
-            (x - xPos == -1 && y - yPos == 2) ||
-            (x - xPos == -1 && y - yPos == -2) ||
-            (x - xPos == 2 && y - yPos == 1) ||
-            (x - xPos == 2 && y - yPos == -1) ||
-            (x - xPos == -2 && y - yPos == 1) ||
-            (x - xPos == -2 && y - yPos == -1)) {
-            
-            
-            // Loops through the white pieces
-            for (Piece z : chess.whitePlayer){
-                
-                // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && this.getIsWhite()) {
-                    return false;
-                }
-            }
-            
-            // Loops through the black pieces
-            for (Piece z : chess.blackPlayer){
-                
-                // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && !this.getIsWhite()) {
-                    return false;
-                }
-            }
-            return true;
         }
         return false;
     }
