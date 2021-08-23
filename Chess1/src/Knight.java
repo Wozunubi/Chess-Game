@@ -24,7 +24,6 @@ public class Knight extends Piece {
     public boolean isLegalMove(Chess1 chess, int xPos, int yPos) { 
         // If the target position is not a legal move then return false
         
-        
         // set a 2 dimesional array for all possible knight moves
         int[][] legalKnightMoves = new int[][] {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
         
