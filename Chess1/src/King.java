@@ -24,35 +24,31 @@ public class King extends Piece {
     public boolean isLegalMove(Chess1 chess, int xPos, int yPos) {
         // If the target position is not a legal move then return false
 
-        //could be set as an array that is iterated through but this still works
-        if ((x - xPos == -1 && y - yPos == 1) ||
-            (x - xPos == -1 && y - yPos == 0) ||
-            (x - xPos == -1 && y - yPos == -1) ||
-            (x - xPos == 0 && y - yPos == 1) ||
-            (x - xPos == 0 && y - yPos == -1) ||
-            (x - xPos == 1 && y - yPos == 1) ||
-            (x - xPos == 1 && y - yPos == 0) ||
-            (x - xPos == 1 && y - yPos == -1)) {
-            
-            
-            // Loops through the white pieces
-            for (Piece z : chess.whitePlayer){
+        // set a 2 dimesional array for all possible king moves
+        int[][] legalKingMoves = new int[][] {{-1, 1}, {-1, 0}, {-1, -1}, {0, 1}, {0, -1}, {1, 1}, {1, 0}, {1, -1}};
+        
+        //iterate throught the legalKingMoves array to check if the desired move is legal
+        for (int[] w : legalKingMoves) {
+            if ((x + w[0] == xPos) && (y + w[1] == yPos)) {
+                // Loops through the white pieces
+                for (Piece z : chess.whitePlayer){
                 
-                // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && this.getIsWhite()) {
-                    return false;
+                    // If the target position has another piece of the same colour on it, return false
+                    if ((z.getX() == xPos && z.getY() == yPos) && this.getIsWhite()) {
+                        return false;
+                    }
                 }
-            }
             
-            // Loops through the black pieces
-            for (Piece z : chess.blackPlayer){
+                // Loops through the black pieces
+                for (Piece z : chess.blackPlayer){
                 
-                // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && !this.getIsWhite()) {
-                    return false;
+                    // If the target position has another piece of the same colour on it, return false
+                    if ((z.getX() == xPos && z.getY() == yPos) && !this.getIsWhite()) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     } 
