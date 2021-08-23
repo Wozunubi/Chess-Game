@@ -31,7 +31,7 @@ public class Bishop extends Piece{
                     if(ydiff > 0){
                         for(int j = y; j >= yPos; j--){
                             //check colour of piece
-                            if (isWhite == true){
+                            if (isWhite){
                                 //goes through the list of white pieces and sees if they intersect with the piece
                                 for(Piece piece : chess.whitePlayer){
                                     if (piece.x == i && piece.y == j){
@@ -52,7 +52,7 @@ public class Bishop extends Piece{
                     //check if piece moved up
                     else if (ydiff < 0){
                         for(int j = y; j <= yPos; j++){
-                            if (isWhite == true){
+                            if (isWhite){
                                 //goes through the list of white pieces and sees if they intersect with the piece
                                 for(Piece piece : chess.whitePlayer){
                                     if (piece.x == i && piece.y == j){
@@ -78,7 +78,7 @@ public class Bishop extends Piece{
                     //check if piece moved down
                     if(ydiff > 0){
                         for(int j = y; j >= yPos; j--){
-                            if (isWhite == true){
+                            if (isWhite){
                                 //goes through the list of white pieces and sees if they intersect with the piece
                                 for(Piece piece : chess.whitePlayer){
                                     if (piece.x == i && piece.y == j){
@@ -100,7 +100,7 @@ public class Bishop extends Piece{
                     else if (ydiff < 0){
                         for(int j = y; j <= yPos; j++){
                             //check colour of piece
-                            if (isWhite == true){
+                            if (isWhite){
                                 //goes through the list of white pieces and sees if they intersect with the piece
                                 for(Piece piece : chess.whitePlayer){
                                     if (piece.x == i && piece.y == j){
