@@ -6,7 +6,7 @@
 
 // Importing library for ImageIcon
 import javax.swing.ImageIcon;
-
+import java.util.ArrayList;
 /**
  *
  * @author Joanna He
@@ -19,61 +19,40 @@ public class Rook extends Piece {
         // Calls parent constructor, passes in variables
         super(x, y, isWhite, image);
     }
-    
+	
     @Override
     public boolean isLegalMove(Chess1 chess, int xPos, int yPos) {
-        // If the target position is not in a staight line, return false
-        if (this.x != xPos || this.y != yPos){
+	// Combines the white and black pieces together	
+        ArrayList<Piece> allPlayer = new ArrayList<Piece>();
+        allPlayer.addAll(chess.whitePlayer);
+        allPlayer.addAll(chess.blackPlayer);
+        // If the destination is not in a straight line, it's not a legal move
+        if (this.getX() != xPos && this.getY() != yPos){
             return false;
         }		
-        // Loops through the white pieces
-        for (Piece z : chess.whitePlayer){
-            
-            // If the target position already has a piece occupying it and is same colour, return false
-            if ((z.x == xPos && z.y == yPos) && 
-                (this.isWhite ^ z.isWhite) ){
-                return false;
-            }
-            
-            // If any white piece is in the middle of the vertical destination, return false
-            if ((this.x == xPos && this.y != yPos) &&
-                ((this.y < yPos) && (this.y < z.y) && (z.y < yPos)) || 
-                ((this.y > yPos) && (this.y > z.y) && (z.y > yPos))) {
-                return false;	
-            }
-            
-            // If any white piece is in the middle of the horizontal destination, return false	
-            if ((this.x != xPos && this.y == yPos) &&
-                ((this.x < xPos) && (this.x < z.x) && (z.x < xPos)) || 
-                ((this.x > xPos) && (this.x > z.x) && (z.x > xPos))) {
-                return false;	
-            } 
+        // Loops through all the pieces
+        for (Piece z : allPlayer){
+                // If the destination space has a piece of the same colour, it's not allowed to move
+                if (z.getX() == xPos && 
+                    z.getY() == yPos && 
+                    (this.getIsWhite() == z.getIsWhite()) ){
+                    return false;
+                }
+                // If the destination space has a piece blocking it vertically, it's not allowed to move
+                if (this.getX() == z.getX() && z.getX() == xPos &&
+                    ((this.getY() < yPos && this.getY() < z.getY() && z.getY() < yPos) || 
+                    (this.getY() > yPos && this.getY() > z.getY() && z.getY() > yPos))) {
+                    return false;	
+                }
+                // If the destination space has a piece blocking it horizontally, it's not allowed to move	
+                if (this.getY() == z.getY() && z.getY() == yPos &&
+                    ((this.getX() < xPos && this.getX() < z.getX() && z.getX() < xPos) || 
+                    (this.getX() > xPos && this.getX() > z.getX() && z.getX() > xPos))) {
+                    return false;	
+                } 
         }
-        
-        // Loops through the black pieces
-        for (Piece z : chess.blackPlayer){
-            
-            // If target position already has a piece occupying it and is same colour, return false
-            if ((z.x == xPos && z.y == yPos) && 
-                (this.isWhite ^ z.isWhite) ){
-                return false;
-            }
-            
-            // If any black piece is in the middle of the vertical destination, return false
-            if ((this.x == xPos && this.y != yPos) &&
-                ((this.y < yPos) && (this.y < z.y) && (z.y < yPos)) || 
-                ((this.y > yPos) && (this.y > z.y) && (z.y > yPos))) {
-                return false;	
-            }
-            
-            // If any black piece is in the middle of the horizontal destination, return false	
-            if ((this.x != xPos && this.y == yPos) &&
-                ((this.x < xPos) && (this.x < z.x) && (z.x < xPos)) || 
-                ((this.x > xPos) && (this.x > z.x) && (z.x > xPos))) {
-                return false;	
-            } 
-        }
-		
+	// Otherwise, it's a legal move
         return true;
     } 
 }
+
