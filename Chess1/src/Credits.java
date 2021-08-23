@@ -27,28 +27,32 @@ public class Credits extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnBackCredit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Credits.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Credits (1).jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 394));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        btnBackCredit.setText("Back");
+        btnBackCredit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackCreditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBackCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 150, 50));
 
         pack();
     }// </editor-fold>                        
 
+    private void btnBackCreditActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        dispose();
+    }                                             
+
     // Variables declaration - do not modify                     
+    private javax.swing.JButton btnBackCredit;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration                   
 }
