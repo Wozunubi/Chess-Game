@@ -10,9 +10,6 @@
  */
 public class TitlePage extends javax.swing.JFrame {
 
-    int startGameCounter = 0;
-    int tutorialCounter = 0;
-    int creditsCounter = 0;
     /**
      * Creates new form OpenProgramError
      */
@@ -69,10 +66,7 @@ public class TitlePage extends javax.swing.JFrame {
 
     private void btnCreditsActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-        if(creditsCounter == 0){
-            new Credits().setVisible(true);
-            creditsCounter++;
-        }
+        new Credits().setVisible(true);
     }                                          
 
     private void btnTutorialActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -81,10 +75,8 @@ public class TitlePage extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        if(startGameCounter == 0){
-            new Chess1().setVisible(true);
-            startGameCounter++;
-        }
+        new Chess1().setVisible(true);
+        dispose();
     }                                        
 
     // Variables declaration - do not modify                     
