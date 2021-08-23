@@ -50,7 +50,7 @@ public class Knight extends Piece {
             for (Piece z : chess.whitePlayer){
                 
                 // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && this.isWhite ^ z.isWhite == false) {
+                if ((z.getX() == xPos && z.getY() == yPos) && this.getIsWhite()) {
                     return false;
                 }
             }
@@ -59,7 +59,7 @@ public class Knight extends Piece {
             for (Piece z : chess.blackPlayer){
                 
                 // If the target position has another piece of the same colour on it, return false
-                if ((z.getX() == xPos && z.getY() == yPos) && this.isWhite ^ z.isWhite == true) {
+                if ((z.getX() == xPos && z.getY() == yPos) && !this.getIsWhite()) {
                     return false;
                 }
             }
