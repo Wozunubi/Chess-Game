@@ -1218,6 +1218,18 @@ public class Chess1 extends javax.swing.JFrame {
         tilePressed(8, 8);
     }//GEN-LAST:event_H8ActionPerformed
     
+    private void btnResignActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        if(turnCount == 0 || turnCount%2 == 0){
+            new blackWins().setVisible(true);
+            dispose();
+        }
+        else{
+            new whiteWins().setVisible(true);
+            dispose();
+        }
+    }
+    
     public void tilePressed(int x, int y) {      
         // Resets output
         txtOutput.setText("");
