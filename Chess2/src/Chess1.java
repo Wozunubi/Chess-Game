@@ -1063,6 +1063,8 @@ public class Chess1 extends javax.swing.JFrame {
     public void tilePressed(int x, int y) {      
         // Resets output
         //txtOutput.setText("");
+        Piece originalPiece, capturedPiece = null;
+        int originalX, originalY;
         
         // Increments click counter
         clickCount++;
@@ -1111,6 +1113,7 @@ public class Chess1 extends javax.swing.JFrame {
                     for (Piece z : whitePlayer) {
                         if (z.getX() == x && z.getY() == y) {
                             System.out.println("asdf");
+                            capturedPiece = z;
                             whitePlayer.remove(z);
                             break;
                         }
@@ -1118,6 +1121,7 @@ public class Chess1 extends javax.swing.JFrame {
                 } else {
                     for (Piece z : blackPlayer) {
                         if (z.getX() == x && z.getY() == y) {
+                            capturedPiece = z;
                             blackPlayer.remove(z);
                             System.out.println("gfds");
                             break;
@@ -1132,10 +1136,11 @@ public class Chess1 extends javax.swing.JFrame {
                           txtOutput.setText("Black's Turn.");
                 }
                 
-                int originalX = selectedPiece.getX();
-                int originalY = selectedPiece.getY();
+                //originalPiece = selectedPiece;
+                originalX = selectedPiece.getX();
+                originalY = selectedPiece.getY();
                 
-                System.out.println("checking " + originalX + " " + originalY);
+                //System.out.println("checking " + originalX + " " + originalY);
                 
                 // Update new x and y position of the piece
                 selectedPiece.setX(x);
@@ -1144,7 +1149,21 @@ public class Chess1 extends javax.swing.JFrame {
                 if (inCheck(x, y)) {
                     selectedPiece.setX(originalX);
                     selectedPiece.setY(originalY);
-                    clickCount = 0;
+                    
+                    /*selectedPiece.setX(originalPiece.getX());
+                    selectedPiece.setY(originalPiece.getY());*/
+                    
+                    
+                    if (capturedPiece != null) {
+                        //System.out.println(capturedPiece.getClass() + " " + capturedPiece.getIsWhite() + " " + capturedPiece.getX() + " " +  capturedPiece.getY());
+                        
+                        if (capturedPiece.getIsWhite()) {
+                            whitePlayer.add(capturedPiece);
+                        } else {
+                            blackPlayer.add(capturedPiece);
+                        }
+                    }
+                    
                     turnCount--;
                 }
                 
