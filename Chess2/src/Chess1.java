@@ -48,8 +48,6 @@ public class Chess1 extends javax.swing.JFrame {
         initComponents();
         
         mapStringToJButton();
-        
-        
     }
     
     /**
@@ -767,14 +765,14 @@ public class Chess1 extends javax.swing.JFrame {
         blackPlayer.add(new Knight(7, 8, false, blackKnight));
         
         // Adds the bishops to the white and black player
-        whitePlayer.add(new Bishop(3, 1, true, whiteBishop));
+        /*whitePlayer.add(new Bishop(3, 1, true, whiteBishop));
         whitePlayer.add(new Bishop(6, 1, true, whiteBishop));
         blackPlayer.add(new Bishop(3, 8, false, blackBishop));
         blackPlayer.add(new Bishop(6, 8, false, blackBishop));
         
         // Adds the queens to the white and black player
         whitePlayer.add(new Queen(4, 1, true, whiteQueen));
-        blackPlayer.add(new Queen(4, 8, false, blackQueen));
+        blackPlayer.add(new Queen(4, 8, false, blackQueen));*/
         
         // Adds the kingss to the white and black player
         whitePlayer.add(new King(5, 1, true, whiteKing));
@@ -1134,10 +1132,22 @@ public class Chess1 extends javax.swing.JFrame {
                           txtOutput.setText("Black's Turn.");
                 }
                 
+                int originalX = selectedPiece.getX();
+                int originalY = selectedPiece.getY();
+                
+                System.out.println("checking " + originalX + " " + originalY);
+                
                 // Update new x and y position of the piece
                 selectedPiece.setX(x);
                 selectedPiece.setY(y);
 
+                if (inCheck(x, y)) {
+                    selectedPiece.setX(originalX);
+                    selectedPiece.setY(originalY);
+                    clickCount = 0;
+                    turnCount--;
+                }
+                
                 // Updates board
                 updateBoard();
 
@@ -1154,6 +1164,50 @@ public class Chess1 extends javax.swing.JFrame {
         } else {
             clickCount = 0;
         }
+    }
+    
+    public boolean inCheck(int x, int y) {
+        Piece tempKing = null;
+        
+        if (selectedPiece.getIsWhite()) {
+            for (Piece z : whitePlayer) {
+                //System.out.println(z.getClass());
+                if (z.getClass() == King.class) {
+                    //System.out.println("yes");
+                    tempKing = z;
+                    break;
+                }
+            }
+
+            //System.out.println("check " + tempKing.getX() + " " + tempKing.getY());
+
+            for (Piece z : blackPlayer) {
+                // check isLegalMove, xPos, yPos, white king
+                if (z.isLegalMove(this, tempKing.getX(), tempKing.getY())) {
+                    System.out.println("checkW " + tempKing.getX() + " " + tempKing.getY());
+                    return true;
+                }
+            }
+        } else {
+            for (Piece z : blackPlayer) {
+                //System.out.println(z.getClass());
+                if (z.getClass() == King.class) {
+                    //System.out.println("yes");
+                    tempKing = z;
+                    break;
+                }
+            }
+
+            for (Piece z : whitePlayer) {
+                // check isLegalMove, xPos, yPos, white king
+                if (z.isLegalMove(this, tempKing.getX(), tempKing.getY())) {
+                    System.out.println("checkB " + tempKing.getX() + " " + tempKing.getY());
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
     
     // Updates board
@@ -1246,6 +1300,7 @@ public class Chess1 extends javax.swing.JFrame {
         stringToJButton.put("H7", H7);
         stringToJButton.put("H8", H8);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton A1;
