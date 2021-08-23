@@ -1283,6 +1283,13 @@ public class Chess1 extends javax.swing.JFrame {
                     }
                 }
                 
+                // Displays who turn it is
+                if (!selectedPiece.getIsWhite()){
+                          txtOutput.setText("White's Turn.");
+                 } else {
+                          txtOutput.setText("Black's Turn.");
+                }
+                
                 // Update new x and y position of the piece
                 selectedPiece.setX(x);
                 selectedPiece.setY(y);
