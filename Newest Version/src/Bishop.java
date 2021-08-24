@@ -28,7 +28,7 @@ public class Bishop extends Piece{
 	// Loops through all the pieces
         for (Piece z : allPlayer){
             
-            // If the destination space has a piece of the same colour, it's not allowed to move
+            // If the destination space has a piece of the same colour, it's not allowed to move there
             if (z.getX() == xPos && 
                 z.getY() == yPos && 
                 (this.getIsWhite() == z.getIsWhite()) ){
