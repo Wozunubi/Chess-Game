@@ -16,7 +16,7 @@ public class Queen extends Piece{
     @Override
     public boolean isLegalMove (Chess chess, int xPos, int yPos){
         // Combines the white and black pieces together
-        ArrayList<Piece> allPlayer = new ArrayList();
+        ArrayList<Piece> allPlayer = new ArrayList<Piece>();
         allPlayer.addAll(chess.whitePlayer);
         allPlayer.addAll(chess.blackPlayer);
 

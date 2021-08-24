@@ -6,9 +6,10 @@
 
 /**
  *
- * @author 334013489
+ * @author georg
  */
 public class PlayerName extends javax.swing.JFrame {
+
     /**
      * Creates new form PlayerName
      */
@@ -27,6 +28,7 @@ public class PlayerName extends javax.swing.JFrame {
 
         txtWhiteSideName = new javax.swing.JTextField();
         txtBlackSideName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnEnter = new javax.swing.JButton();
@@ -36,7 +38,8 @@ public class PlayerName extends javax.swing.JFrame {
         getContentPane().add(txtWhiteSideName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 570, 50));
         getContentPane().add(txtBlackSideName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 570, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Player Name.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\georg\\Downloads\\Culminating-main (21)\\Culminating-main\\Newest Version\\src\\Player Name.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 400));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 410));
 
         btnBack.setText("Back");
@@ -45,7 +48,7 @@ public class PlayerName extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 150, 40));
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 150, 40));
 
         btnEnter.setText("Enter");
         btnEnter.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +56,7 @@ public class PlayerName extends javax.swing.JFrame {
                 btnEnterActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 160, 50));
+        getContentPane().add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 160, 50));
 
         pack();
         setLocationRelativeTo(null);
@@ -70,19 +73,19 @@ public class PlayerName extends javax.swing.JFrame {
             if (txtWhiteSideName.getText().equals("")) {
                 txtWhiteSideName.setText("--Error: Please enter a username");
             }
-            
+
             if (txtBlackSideName.getText().equals("")) {
                 txtBlackSideName.setText("--Error: Please enter a username");
             }
-            
+
             return;
         }
-        
+
         Chess mainBoard = new Chess(this);
         mainBoard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEnterActionPerformed
-   
+
     public String WhiteSideName(){
         return txtWhiteSideName.getText();
     }
@@ -90,11 +93,12 @@ public class PlayerName extends javax.swing.JFrame {
     public String BlackSideName(){
         return txtBlackSideName.getText();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     public javax.swing.JButton btnEnter;
     public javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtBlackSideName;
     private javax.swing.JTextField txtWhiteSideName;
     // End of variables declaration//GEN-END:variables

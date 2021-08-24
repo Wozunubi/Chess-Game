@@ -79,7 +79,8 @@ public class TitlePage extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        new Chess().setVisible(true);
+        PlayerName name = new PlayerName();
+        name.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnStartActionPerformed
 

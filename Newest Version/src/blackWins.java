@@ -64,7 +64,7 @@ public class blackWins extends javax.swing.JFrame {
 
     private void btnPlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAgainActionPerformed
         // TODO add your handling code here:
-        new Chess().setVisible(true);
+        new PlayerName().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnPlayAgainActionPerformed
 
