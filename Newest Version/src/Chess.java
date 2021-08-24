@@ -1206,10 +1206,10 @@ public class Chess extends javax.swing.JFrame {
                 turnCount++;
             }
 
+            checkForPromotion();
+            
             // Updates board
             updateBoard();
-
-            checkForPromotion();
             
             // Resets clicks to 0
             clickCount = 0;
@@ -1286,56 +1286,21 @@ public class Chess extends javax.swing.JFrame {
         }
     }
     
-    public void checkForPromotion(){
-        int arraySizeBlack = blackPlayer.size();
-        int arraySizeWhite = whitePlayer.size();
+    public void checkForPromotion() { 
+        for (Piece z : whitePlayer) {
+            if (z.getClass() == Pawn.class && z.getY() == 8) {
+                new PromotionGraphics(this, z).setVisible(true);
+                break;
+            }           
+        }
         
-        for(int counter = 0; counter < arraySizeBlack; counter++){
-            if(blackPlayer.get(counter).getImage() == blackPawn && blackPlayer.get(counter).getY() == 1){
-                new PromotionGraphics(counter, blackPlayer.get(counter).getX(), blackPlayer.get(counter).getY(), blackPlayer.get(counter).getIsWhite()).setVisible(true);
+        for (Piece z : blackPlayer) {
+            if (z.getClass() == Pawn.class && z.getY() == 1) {
+                new PromotionGraphics(this, z).setVisible(true);
+                break;
             }           
         }
-        for(int counter = 0; counter < arraySizeWhite; counter++){
-            if(whitePlayer.get(counter).getImage() == whitePawn && whitePlayer.get(counter).getY() == 8){
-                new PromotionGraphics(counter, whitePlayer.get(counter).getX(), whitePlayer.get(counter).getY(), whitePlayer.get(counter).getIsWhite()).setVisible(true);
-            }           
-        }
-    }
-    
-    public void PromotionChange(int pawn, int xAxis, int yAxis, String promotionTo){
-        if(yAxis == 1 && promotionTo.equals("rook")){
-            blackPlayer.add(new Rook(xAxis, yAxis, false, blackRook));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(blackRook);
-        }
-        if(yAxis == 1 && promotionTo.equals("knight")){
-            blackPlayer.add(new Knight(xAxis, yAxis, false, blackKnight));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(blackKnight);
-        }
-        if(yAxis == 1 && promotionTo.equals("bishop")){
-            blackPlayer.add(new Bishop(xAxis, yAxis, false, blackBishop));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(blackBishop);
-        }
-        if(yAxis == 1 && promotionTo.equals("queen")){
-            blackPlayer.add(new Queen(xAxis, yAxis, false, blackQueen));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(blackQueen);
-        }
-        if(yAxis == 8 && promotionTo.equals("rook")){
-            whitePlayer.add(new Rook(xAxis, yAxis, true, whiteRook));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(whiteRook);
-        }
-        if(yAxis == 8 && promotionTo.equals("knight")){
-            whitePlayer.add(new Knight(xAxis, yAxis, true, whiteKnight));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(whiteKnight);
-        }
-        if(yAxis == 8 && promotionTo.equals("bishop")){
-            whitePlayer.add(new Bishop(xAxis, yAxis, true, whiteBishop));
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(whiteBishop);
-        }
-        if(yAxis == 8 && promotionTo.equals("queen")){
-            whitePlayer.add(new Queen(xAxis, yAxis, true, whiteQueen)); 
-            stringToJButton.get("" + (char)(xAxis+64) + (yAxis)).setIcon(whiteQueen);
-        }
-    }
+    }           
     
     // Assigns JButton to a String equivalent
     private void mapStringToJButton() {
