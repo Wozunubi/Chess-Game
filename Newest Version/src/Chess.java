@@ -23,20 +23,20 @@ public class Chess extends javax.swing.JFrame {
     public HashMap<String, JButton> stringToJButton = new HashMap();
     
     // Declaring objects to store each piece image
-    ImageIcon whiteRook = new ImageIcon("src/images/white rook.png");
-    ImageIcon whiteKnight = new ImageIcon("src/images/white knight.png");
-    ImageIcon whiteBishop = new ImageIcon("src/images/white bishop.png");
-    ImageIcon whiteQueen = new ImageIcon("src/images/white queen.png");
-    ImageIcon whiteKing = new ImageIcon("src/images/white king.png");
-    ImageIcon whitePawn = new ImageIcon("src/images/white pawn.png");
-    ImageIcon blackRook = new ImageIcon("src/images/black rook.png");
-    ImageIcon blackKnight = new ImageIcon("src/images/black knight.png");
-    ImageIcon blackBishop = new ImageIcon("src/images/black bishop.png");
-    ImageIcon blackQueen = new ImageIcon("src/images/black queen.png");
-    ImageIcon blackKing = new ImageIcon("src/images/black king.png");
-    ImageIcon blackPawn = new ImageIcon("src/images/black pawn.png");
-    ImageIcon whiteTurn = new ImageIcon("src/images/White Turn.jpg");
-    ImageIcon blackTurn = new ImageIcon("src/images/Black Turn.jpg");
+    ImageIcon whiteRook = new ImageIcon("white rook.png");
+    ImageIcon whiteKnight = new ImageIcon("white knight.png");
+    ImageIcon whiteBishop = new ImageIcon("white bishop.png");
+    ImageIcon whiteQueen = new ImageIcon("white queen.png");
+    ImageIcon whiteKing = new ImageIcon("white king.png");
+    ImageIcon whitePawn = new ImageIcon("white pawn.png");
+    ImageIcon blackRook = new ImageIcon("black rook.png");
+    ImageIcon blackKnight = new ImageIcon("black knight.png");
+    ImageIcon blackBishop = new ImageIcon("black bishop.png");
+    ImageIcon blackQueen = new ImageIcon("black queen.png");
+    ImageIcon blackKing = new ImageIcon("black king.png");
+    ImageIcon blackPawn = new ImageIcon("black pawn.png");
+    ImageIcon whiteTurn = new ImageIcon("White Turn.jpg");
+    ImageIcon blackTurn = new ImageIcon("Black Turn.jpg");
     
     // Used for user click logic
     Piece selectedPiece;
