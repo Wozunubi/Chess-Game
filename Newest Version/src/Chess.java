@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.time.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author ahhhhhh
@@ -18,7 +21,9 @@ public class Chess extends javax.swing.JFrame {
     // Declares two ArrayLists for storing the white and black pieces
     public ArrayList<Piece> whitePlayer = new ArrayList();
     public ArrayList<Piece> blackPlayer = new ArrayList();
-    
+    //variables to track time
+    public int seconds = 0;
+    public int minutes = 0;
     // Hashmap for converting string to JButton
     public HashMap<String, JButton> stringToJButton = new HashMap();
     
@@ -127,6 +132,7 @@ public class Chess extends javax.swing.JFrame {
         B1 = new javax.swing.JButton();
         H1 = new javax.swing.JButton();
         txtOutput = new javax.swing.JTextField();
+        txtTime = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnResign = new javax.swing.JButton();
@@ -692,7 +698,9 @@ public class Chess extends javax.swing.JFrame {
             }
         });
         getContentPane().add(C1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 790, 100, 100));
-        getContentPane().add(labelTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 260, 70));
+
+        labelTurn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(labelTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 360, 70));
 
         B1.setBackground(java.awt.Color.white);
         B1.setForeground(java.awt.Color.white);
@@ -719,6 +727,19 @@ public class Chess extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtOutput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 910, 800, -1));
+
+        txtTime.setEditable(false);
+        txtTime.setBackground(new java.awt.Color(0, 0, 0));
+        txtTime.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        txtTime.setForeground(new java.awt.Color(255, 255, 255));
+        txtTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTime.setBorder(null);
+        txtTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 100, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Chess Board.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 1090));
@@ -747,7 +768,28 @@ public class Chess extends javax.swing.JFrame {
         // Resets counters
         clickCount = 0;
         turnCount = 0;
+        //creating timer to track game time
+        Timer t = new Timer( );
+        //the timer refreshes every second and updates the textField
+        t.scheduleAtFixedRate(new TimerTask() {
 
+        @Override
+        public void run() {
+            seconds++;
+            if (seconds == 60){
+                minutes ++;
+                seconds = 0;
+            }
+            
+            if (seconds < 10){
+                txtTime.setText(minutes + ":0" + seconds);
+            }
+            else{
+                txtTime.setText(minutes + ":" + seconds);
+            }
+        }
+        },0,1000);
+        
         // Clears white and black pieces
         whitePlayer.clear();
         blackPlayer.clear();
@@ -1061,6 +1103,10 @@ public class Chess extends javax.swing.JFrame {
     private void txtOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOutputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOutputActionPerformed
+
+    private void txtTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimeActionPerformed
 
     public void tilePressed(int x, int y) {      
         Piece originalPiece, capturedPiece = null;
@@ -1430,5 +1476,6 @@ public class Chess extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelTurn;
     private javax.swing.JTextField txtOutput;
+    private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }
