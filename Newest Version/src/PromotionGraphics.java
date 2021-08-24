@@ -10,17 +10,16 @@
  */
 public class PromotionGraphics extends javax.swing.JFrame {
 
-    int pawn, xAxis, yAxis;
-    boolean colour;
+    private Piece promotedPawn;
+    private Chess chess;
     
     /**
      * Creates new form PromotionGraphics
      */
-    public PromotionGraphics(int pawnValue, int x, int y, boolean color) {
-        pawn = pawnValue;
-        xAxis = x;
-        yAxis = y;
-        colour = color;
+    public PromotionGraphics(Chess chess, Piece promotedPawn) {
+        this.chess = chess;
+        this.promotedPawn = promotedPawn;
+        
         initComponents();
     }
 
@@ -82,32 +81,50 @@ public class PromotionGraphics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRookActionPerformed
-        // TODO add your handling code here:
-        PromotionChange("rook");
-        dispose();
+        promotionChange("rook");
     }//GEN-LAST:event_btnRookActionPerformed
 
     private void btnBishopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBishopActionPerformed
-        // TODO add your handling code here:
-        PromotionChange("bishop");
-        dispose();
+        promotionChange("bishop");
     }//GEN-LAST:event_btnBishopActionPerformed
 
     private void btnKnightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKnightActionPerformed
-        // TODO add your handling code here:
-        PromotionChange("knight");
-        dispose();
+        promotionChange("knight");
     }//GEN-LAST:event_btnKnightActionPerformed
 
     private void btnQueenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQueenActionPerformed
-        // TODO add your handling code here:
-        PromotionChange("queen");
-        dispose();
+        promotionChange("queen");
     }//GEN-LAST:event_btnQueenActionPerformed
     
-    public void PromotionChange(String changeType){
-        Chess promote = new Chess();
-        promote.PromotionChange(pawn, xAxis, yAxis, changeType);
+    public void promotionChange(String promotionTo){    
+        if (promotedPawn.getIsWhite()) {
+            chess.whitePlayer.remove(promotedPawn);
+            
+            if (promotionTo.equals("rook")) {
+                chess.whitePlayer.add(new Rook(promotedPawn.getX(), 8, true, chess.whiteRook));
+            } else if (promotionTo.equals("knight")) {
+                chess.whitePlayer.add(new Knight(promotedPawn.getX(), 8, true, chess.whiteKnight));
+            } else if (promotionTo.equals("bishop")) {
+                chess.whitePlayer.add(new Bishop(promotedPawn.getX(), 8, true, chess.whiteBishop));
+            } else if (promotionTo.equals("queen")) {
+                chess.whitePlayer.add(new Queen(promotedPawn.getX(), 8, true, chess.whiteQueen));
+            }
+        } else {
+            chess.blackPlayer.remove(promotedPawn);
+            
+            if (promotionTo.equals("rook")) {
+                chess.blackPlayer.add(new Rook(promotedPawn.getX(), 1, false, chess.blackRook));
+            } else if (promotionTo.equals("knight")) {
+                chess.blackPlayer.add(new Knight(promotedPawn.getX(), 1, false, chess.blackKnight));
+            } else if (promotionTo.equals("bishop")) {
+                chess.blackPlayer.add(new Bishop(promotedPawn.getX(), 1, false, chess.blackBishop));
+            } else if (promotionTo.equals("queen")) {
+                chess.blackPlayer.add(new Queen(promotedPawn.getX(), 1, false, chess.blackQueen));
+            }
+        }
+        
+        chess.updateBoard();
+        this.dispose();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
