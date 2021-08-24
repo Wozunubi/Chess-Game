@@ -34,22 +34,25 @@ public class Rook extends Piece {
 	    
         // Loops through all the pieces
         for (Piece z : allPlayer){
-            // If the destination space has a piece of the same colour, it's not allowed to move
+            
+            // If the destination space has a piece of the same colour, it's not allowed to move there
             if (z.getX() == xPos && 
                 z.getY() == yPos && 
                 (this.getIsWhite() == z.getIsWhite()) ){
                 return false;
             }
-            // If the destination space has a piece blocking it vertically, it's not allowed to move
+            
+            // If the destination space has a piece blocking it vertically, it's not allowed to move there
             if (this.getX() == z.getX() && z.getX() == xPos &&
-                ((this.getY() < yPos && this.getY() < z.getY() && z.getY() < yPos) || 
-                (this.getY() > yPos && this.getY() > z.getY() && z.getY() > yPos))) {
-                return false;	
+                ((this.getY() < z.getY() && z.getY() < yPos) || 
+                (this.getY() > z.getY() && z.getY() > yPos))) {
+                return false;
             }
-            // If the destination space has a piece blocking it horizontally, it's not allowed to move	
+            
+            // If the destination space has a piece blocking it horizontally, it's not allowed to move there
             if (this.getY() == z.getY() && z.getY() == yPos &&
-                ((this.getX() < xPos && this.getX() < z.getX() && z.getX() < xPos) || 
-                (this.getX() > xPos && this.getX() > z.getX() && z.getX() > xPos))) {
+                ((this.getX() < z.getX() && z.getX() < xPos) || 
+                (this.getX() > z.getX() && z.getX() > xPos))) {
                 return false;	
             } 
         }
