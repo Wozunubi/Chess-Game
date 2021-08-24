@@ -1144,7 +1144,28 @@ public class Chess extends javax.swing.JFrame {
             selectedPiece.setX(x);
             selectedPiece.setY(y);
 
+            int kingX = 0, kingY = 0;
+            
+            if (turnCount%2 == 0) {
+                for (Piece z : whitePlayer) {
+                    if (z.getClass() == King.class) {
+                        kingX = z.getX();
+                        kingY = z.getY();
+                        break;
+                    }
+                } 
+            } else {
+                for (Piece z : blackPlayer) {
+                    if (z.getClass() == King.class) {
+                        kingX = z.getX();
+                        kingY = z.getY();
+                        break;
+                    }
+                }
+            }
+            
             if (inCheck(turnCount%2, kingX, kingY)) {
+                
                 selectedPiece.setX(originalX);
                 selectedPiece.setY(originalY);
                 
@@ -1157,19 +1178,23 @@ public class Chess extends javax.swing.JFrame {
                 }
             } else {
                 if (turnCount%2 == 1) {
-                    labelTurn.setText(names.WhiteSideName() + "'s turn (White)");
+                    labelTurn.setIcon(whiteTurn);
                 } else {
-                    labelTurn.setText(names.BlackSideName() + "'s turn (Black)");
+                    labelTurn.setIcon(blackTurn);
                 }
-                
                 
                 turnCount++;
             }
-
-            checkForPromotion();
+            
+            if (inCheckmate()) {
+                 System.out.println("Game over");
+            }
+            
             
             // Updates board
             updateBoard();
+
+            checkForPromotion();
             
             // Resets clicks to 0
             clickCount = 0;
@@ -1178,6 +1203,7 @@ public class Chess extends javax.swing.JFrame {
             clickCount = 0;
         }
     }
+
     
     public boolean inCheck(int checkWhite, int x, int y) {
         
@@ -1203,6 +1229,7 @@ public class Chess extends javax.swing.JFrame {
         }
         return false;
     }
+ 
     
     // Updates board
     public void updateBoard() {
