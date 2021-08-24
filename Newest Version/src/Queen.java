@@ -53,14 +53,14 @@ public class Queen extends Piece{
                 return false;
             }
             
-            // If the destination space has a piece blocking it vertically, it's not allowed to move
+            // If the destination space has a piece blocking it vertically, it's not allowed to move there
             if (this.getX() == z.getX() && z.getX() == xPos &&
                 ((this.getY() < z.getY() && z.getY() < yPos) || 
                 (this.getY() > z.getY() && z.getY() > yPos))) {
                 return false;
             }
             
-            // If the destination space has a piece blocking it horizontally, it's not allowed to move	
+            // If the destination space has a piece blocking it horizontally, it's not allowed to move there	
             if (this.getY() == z.getY() && z.getY() == yPos &&
                 ((this.getX() < z.getX() && z.getX() < xPos) || 
                 (this.getX() > z.getX() && z.getX() > xPos))) {
