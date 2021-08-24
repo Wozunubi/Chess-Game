@@ -46,11 +46,14 @@ public class Chess extends javax.swing.JFrame {
     // Used for user click logic
     Piece selectedPiece;
     int clickCount = 0, turnCount = 0;
+    PlayerName names;
     
     /**
      * Creates new form Chess
      */
-    public Chess() {
+    public Chess(PlayerName names) {
+        this.names = names;
+        
         // GUI
         initComponents();
         
@@ -826,7 +829,7 @@ public class Chess extends javax.swing.JFrame {
             blackPlayer.add(new Pawn(i, 7, false, blackPawn));
         }
         
-        labelTurn.setIcon(whiteTurn);
+        labelTurn.setText(names.WhiteSideName() + "'s turn (White)");
         
         // Updates board
         updateBoard();
@@ -1197,10 +1200,10 @@ public class Chess extends javax.swing.JFrame {
                     }
                 }
             } else {
-                if (!selectedPiece.getIsWhite()) {
-                    labelTurn.setIcon(whiteTurn);
+                if (turnCount%2 == 1) {
+                    labelTurn.setText(names.WhiteSideName() + "'s turn (White)");
                 } else {
-                    labelTurn.setIcon(blackTurn);
+                    labelTurn.setText(names.BlackSideName() + "'s turn (Black)");
                 }
                 
                 turnCount++;
