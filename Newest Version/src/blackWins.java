@@ -53,6 +53,7 @@ public class blackWins extends javax.swing.JFrame {
         getContentPane().add(btnPlayAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 260, 80));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

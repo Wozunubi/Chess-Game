@@ -34,7 +34,7 @@ public class whiteWins extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White Wins.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
 
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -42,7 +42,7 @@ public class whiteWins extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 260, 80));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 260, 80));
 
         btnPlayAgain.setText("Play Again");
         btnPlayAgain.addActionListener(new java.awt.event.ActionListener() {
@@ -50,9 +50,10 @@ public class whiteWins extends javax.swing.JFrame {
                 btnPlayAgainActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlayAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 260, 80));
+        getContentPane().add(btnPlayAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 260, 80));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

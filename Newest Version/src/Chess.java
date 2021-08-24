@@ -1063,10 +1063,11 @@ public class Chess extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOutputActionPerformed
 
     public void tilePressed(int x, int y) {      
-        // Resets output
-        //txtOutput.setText("");
         Piece originalPiece, capturedPiece = null;
         int originalX, originalY;
+        
+        // Resets output
+        txtOutput.setText("");
         
         // Increments click counter
         clickCount++;
@@ -1107,96 +1108,78 @@ public class Chess extends javax.swing.JFrame {
                 txtOutput.setText("--Error: Select the correct colour piece first, and not an empty tile!");
                 clickCount = 0; // Reset clicks to 0
             }
-        } else if (clickCount == 2 && selectedPiece.isLegalMove(this, x, y)) { // If clicks is equal to 2
-            // Checks if the second tile choosen is the same as the first
-            if (selectedPiece.getX() != x || selectedPiece.getY() != y) {
+        } else if (clickCount == 2 && selectedPiece.isLegalMove(this, x, y)) { // If clicks is equal to 2       
+            
+            // Checks if the second tile choosen is the same as the first   
+            if (!selectedPiece.getIsWhite()) {
+                labelTurn.setIcon(whiteTurn);
                 
-                if (!selectedPiece.getIsWhite()) {
-                    for (Piece z : whitePlayer) {
-                        if (z.getX() == x && z.getY() == y) {
-                            System.out.println("asdf");
-                            capturedPiece = z;
-                            whitePlayer.remove(z);
-                            break;
-                        }
-                    }
-                } else {
-                    for (Piece z : blackPlayer) {
-                        if (z.getX() == x && z.getY() == y) {
-                            capturedPiece = z;
-                            blackPlayer.remove(z);
-                            System.out.println("gfds");
-                            break;
-                        }
+                for (Piece z : whitePlayer) {
+                    if (z.getX() == x && z.getY() == y) {
+                        System.out.println("asdf");
+                        capturedPiece = z;
+                        whitePlayer.remove(z);
+                        break;
                     }
                 }
-                
-                // Displays who turn it is
-                if (!selectedPiece.getIsWhite()){
-                          labelTurn.setIcon(whiteTurn);
-                 } else {
-                          labelTurn.setIcon(blackTurn);
-                }
-                
-                //originalPiece = selectedPiece;
-                originalX = selectedPiece.getX();
-                originalY = selectedPiece.getY();
-                
-                //System.out.println("checking " + originalX + " " + originalY);
-                
-                // Update new x and y position of the piece
-                selectedPiece.setX(x);
-                selectedPiece.setY(y);
-
-                if (inCheck(x, y)) {
-                    selectedPiece.setX(originalX);
-                    selectedPiece.setY(originalY);
-                    
-                    /*selectedPiece.setX(originalPiece.getX());
-                    selectedPiece.setY(originalPiece.getY());*/
-                    
-                    
-                    if (capturedPiece != null) {
-                        //System.out.println(capturedPiece.getClass() + " " + capturedPiece.getIsWhite() + " " + capturedPiece.getX() + " " +  capturedPiece.getY());
-                        
-                        if (capturedPiece.getIsWhite()) {
-                            whitePlayer.add(capturedPiece);
-                        } else {
-                            blackPlayer.add(capturedPiece);
-                        }
-                    }
-                    
-                    turnCount--;
-                }
-                
-                // Updates board
-                updateBoard();
-
-                CheckForPromotion();
-                // Increments turn
-                turnCount++;
-                
-                // Resets clicks to 0
-                clickCount = 0;
             } else {
-                // Output an error
-                txtOutput.setText("--Error: This piece was clicked twice, please try again!");
-                clickCount = 0; // Reset clicks to 0
+                labelTurn.setIcon(blackTurn);
+                
+                for (Piece z : blackPlayer) {
+                    if (z.getX() == x && z.getY() == y) {
+                        capturedPiece = z;
+                        blackPlayer.remove(z);
+                        System.out.println("gfds");
+                        break;
+                    }
+                }
             }
+            
+            //originalPiece = selectedPiece;
+            originalX = selectedPiece.getX();
+            originalY = selectedPiece.getY();
+
+            // Update new x and y position of the piece
+            selectedPiece.setX(x);
+            selectedPiece.setY(y);
+
+            if (inCheck(x, y)) {
+                selectedPiece.setX(originalX);
+                selectedPiece.setY(originalY);
+                
+                if (capturedPiece != null) {
+                    if (capturedPiece.getIsWhite()) {
+                        whitePlayer.add(capturedPiece);
+                    } else {
+                        blackPlayer.add(capturedPiece);
+                    }
+                }
+            } else {
+                turnCount++;
+            }
+
+            // Updates board
+            updateBoard();
+
+            checkForPromotion();
+
+            // Resets clicks to 0
+            clickCount = 0;
         } else {
+            txtOutput.setText("--Error: This piece was clicked twice, please try again!");
             clickCount = 0;
         }
     }
     
     public boolean inCheck(int x, int y) {
-        Piece tempKing = null;
+        Piece kingPiece = null;
         
         if (selectedPiece.getIsWhite()) {
             for (Piece z : whitePlayer) {
                 //System.out.println(z.getClass());
                 if (z.getClass() == King.class) {
                     //System.out.println("yes");
-                    tempKing = z;
+                    kingPiece = z;
                     break;
                 }
             }
@@ -1205,8 +1188,8 @@ public class Chess extends javax.swing.JFrame {
 
             for (Piece z : blackPlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, tempKing.getX(), tempKing.getY())) {
-                    System.out.println("checkW " + tempKing.getX() + " " + tempKing.getY());
+                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
+                    System.out.println("checkW " + kingPiece.getX() + " " + kingPiece.getY());
                     return true;
                 }
             }
@@ -1215,15 +1198,15 @@ public class Chess extends javax.swing.JFrame {
                 //System.out.println(z.getClass());
                 if (z.getClass() == King.class) {
                     //System.out.println("yes");
-                    tempKing = z;
+                    kingPiece = z;
                     break;
                 }
             }
 
             for (Piece z : whitePlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, tempKing.getX(), tempKing.getY())) {
-                    System.out.println("checkB " + tempKing.getX() + " " + tempKing.getY());
+                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
+                    System.out.println("checkB " + kingPiece.getX() + " " + kingPiece.getY());
                     return true;
                 }
             }
@@ -1255,7 +1238,7 @@ public class Chess extends javax.swing.JFrame {
         }
     }
     
-    public void CheckForPromotion(){
+    public void checkForPromotion(){
         int arraySizeBlack = blackPlayer.size();
         int arraySizeWhite = whitePlayer.size();
         

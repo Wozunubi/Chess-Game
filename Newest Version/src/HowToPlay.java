@@ -96,6 +96,7 @@ public class HowToPlay extends javax.swing.JFrame {
         getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 710, 50, 50));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAppTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppTutorialActionPerformed

@@ -44,6 +44,7 @@ public class Credits extends javax.swing.JFrame {
         getContentPane().add(btnBackCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 150, 50));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackCreditActionPerformed

@@ -64,6 +64,7 @@ public class TitlePage extends javax.swing.JFrame {
         getContentPane().add(btnCredits, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 760, 160, 60));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditsActionPerformed
