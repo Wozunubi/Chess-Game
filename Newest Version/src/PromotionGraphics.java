@@ -78,6 +78,7 @@ public class PromotionGraphics extends javax.swing.JFrame {
         getContentPane().add(btnQueen, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 250, 80));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRookActionPerformed
