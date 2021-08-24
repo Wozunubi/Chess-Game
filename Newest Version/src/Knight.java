@@ -30,7 +30,7 @@ public class Knight extends Piece {
         
         //iterate throught the legalKnightMoves array to check if the desired move is legal
         for (int[] w : legalKnightMoves) {
-            if ((x + w[0] == xPos) && (y + w[1] == yPos)) {
+            if ((this.getX() + w[0] == xPos) && (this.getY() + w[1] == yPos)) {
                 // Loops through the white pieces
                 for (Piece z : chess.whitePlayer){
                 

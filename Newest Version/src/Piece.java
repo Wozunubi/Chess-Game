@@ -11,11 +11,11 @@ import javax.swing.ImageIcon;
  *
  * @author ahhhhhh
  */
-public class Piece {
+public abstract class Piece {
     
-    int x, y; // Piece x and y position
-    boolean isWhite; // Piece colour
-    ImageIcon image; // Image to represent the piece
+    private int x, y; // Piece x and y position
+    private boolean isWhite; // Piece colour
+    private ImageIcon image; // Image to represent the piece
     
     // Constructor
     public Piece(int x, int y, boolean isWhite, ImageIcon image) {

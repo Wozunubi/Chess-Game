@@ -1112,8 +1112,6 @@ public class Chess extends javax.swing.JFrame {
             
             // Checks if the second tile choosen is the same as the first   
             if (!selectedPiece.getIsWhite()) {
-                labelTurn.setIcon(whiteTurn);
-                
                 for (Piece z : whitePlayer) {
                     if (z.getX() == x && z.getY() == y) {
                         System.out.println("asdf");
@@ -1123,8 +1121,6 @@ public class Chess extends javax.swing.JFrame {
                     }
                 }
             } else {
-                labelTurn.setIcon(blackTurn);
-                
                 for (Piece z : blackPlayer) {
                     if (z.getX() == x && z.getY() == y) {
                         capturedPiece = z;
@@ -1155,6 +1151,12 @@ public class Chess extends javax.swing.JFrame {
                     }
                 }
             } else {
+                if (!selectedPiece.getIsWhite()) {
+                    labelTurn.setIcon(whiteTurn);
+                } else {
+                    labelTurn.setIcon(blackTurn);
+                }
+                
                 turnCount++;
             }
 
@@ -1162,7 +1164,7 @@ public class Chess extends javax.swing.JFrame {
             updateBoard();
 
             checkForPromotion();
-
+            
             // Resets clicks to 0
             clickCount = 0;
         } else {
@@ -1243,13 +1245,13 @@ public class Chess extends javax.swing.JFrame {
         int arraySizeWhite = whitePlayer.size();
         
         for(int counter = 0; counter < arraySizeBlack; counter++){
-            if(blackPlayer.get(counter).image==blackPawn && blackPlayer.get(counter).y == 1){
-                new PromotionGraphics(counter, blackPlayer.get(counter).x, blackPlayer.get(counter).y, blackPlayer.get(counter).isWhite).setVisible(true);
+            if(blackPlayer.get(counter).getImage() == blackPawn && blackPlayer.get(counter).getY() == 1){
+                new PromotionGraphics(counter, blackPlayer.get(counter).getX(), blackPlayer.get(counter).getY(), blackPlayer.get(counter).getIsWhite()).setVisible(true);
             }           
         }
         for(int counter = 0; counter < arraySizeWhite; counter++){
-            if(whitePlayer.get(counter).image==whitePawn && whitePlayer.get(counter).y == 8){
-                new PromotionGraphics(counter, whitePlayer.get(counter).x, whitePlayer.get(counter).y, whitePlayer.get(counter).isWhite).setVisible(true);
+            if(whitePlayer.get(counter).getImage() == whitePawn && whitePlayer.get(counter).getY() == 8){
+                new PromotionGraphics(counter, whitePlayer.get(counter).getX(), whitePlayer.get(counter).getY(), whitePlayer.get(counter).getIsWhite()).setVisible(true);
             }           
         }
     }
