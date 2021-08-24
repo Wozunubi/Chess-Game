@@ -24,10 +24,10 @@ public class King extends Piece {
     public boolean isLegalMove(Chess chess, int xPos, int yPos) {
         // If the target position is not a legal move then return false
 
-        // set a 2 dimesional array for all possible knight moves
+        // set a 2 dimesional array for all possible king moves
         int[][] legalKingMoves = new int[][] {{-1, 1}, {-1, 0}, {-1, -1}, {0, 1}, {0, -1}, {1, 1}, {1, 0}, {1, -1}};
         
-        //iterate throught the legalKnightMoves array to check if the desired move is legal
+        //iterate throught the legalKingMoves array to check if the desired move is legal
         for (int[] w : legalKingMoves) {
             if ((this.getX() + w[0] == xPos) && (this.getY() + w[1] == yPos)) {
                 
