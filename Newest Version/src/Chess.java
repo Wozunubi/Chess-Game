@@ -1144,7 +1144,7 @@ public class Chess extends javax.swing.JFrame {
             selectedPiece.setX(x);
             selectedPiece.setY(y);
 
-            if (inCheck(x, y)) {
+            if (inCheck(turnCount%2, kingX, kingY)) {
                 selectedPiece.setX(originalX);
                 selectedPiece.setY(originalY);
                 
@@ -1179,47 +1179,28 @@ public class Chess extends javax.swing.JFrame {
         }
     }
     
-    public boolean inCheck(int x, int y) {
-        Piece kingPiece = null;
+    public boolean inCheck(int checkWhite, int x, int y) {
         
-        if (selectedPiece.getIsWhite()) {
-            for (Piece z : whitePlayer) {
-                //System.out.println(z.getClass());
-                if (z.getClass() == King.class) {
-                    //System.out.println("yes");
-                    kingPiece = z;
-                    break;
-                }
-            }
-
-            //System.out.println("check " + tempKing.getX() + " " + tempKing.getY());
+        if (checkWhite == 0) { // white's turn
 
             for (Piece z : blackPlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
-                    System.out.println("checkW " + kingPiece.getX() + " " + kingPiece.getY());
+                if (z.isLegalMove(this, x, y)) {
+                    System.out.println("checkW " + x + " " + y);
                     return true;
                 }
             }
-        } else {
-            for (Piece z : blackPlayer) {
-                //System.out.println(z.getClass());
-                if (z.getClass() == King.class) {
-                    //System.out.println("yes");
-                    kingPiece = z;
-                    break;
-                }
-            }
+            
+        } else { // black's turn
 
             for (Piece z : whitePlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
-                    System.out.println("checkB " + kingPiece.getX() + " " + kingPiece.getY());
+                if (z.isLegalMove(this, x, y)) {
+                    System.out.println("checkB " + x + " " + y);
                     return true;
                 }
             }
         }
-        
         return false;
     }
     
