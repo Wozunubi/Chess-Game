@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.io.*;
 
 /**
  * @author ahhhhhh
@@ -18,6 +19,9 @@ public class Chess extends javax.swing.JFrame {
     // Declares two ArrayLists for storing the white and black pieces
     public ArrayList<Piece> whitePlayer = new ArrayList();
     public ArrayList<Piece> blackPlayer = new ArrayList();
+    
+    public int blackwins;
+    public int whitewins;
     
     // Hashmap for converting string to JButton
     public HashMap<String, JButton> stringToJButton = new HashMap();
@@ -129,6 +133,8 @@ public class Chess extends javax.swing.JFrame {
         B1 = new javax.swing.JButton();
         H1 = new javax.swing.JButton();
         labelTurn = new javax.swing.JTextField();
+        txtBlackWins = new javax.swing.JTextField();
+        txtWhiteWins = new javax.swing.JTextField();
         txtOutput = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
@@ -715,7 +721,9 @@ public class Chess extends javax.swing.JFrame {
         getContentPane().add(H1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 790, 100, 100));
 
         labelTurn.setEditable(false);
-        getContentPane().add(labelTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 20, 240, 50));
+        getContentPane().add(labelTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 190, 50));
+        getContentPane().add(txtBlackWins, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 150, -1));
+        getContentPane().add(txtWhiteWins, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 150, -1));
 
         txtOutput.setEditable(false);
         txtOutput.addActionListener(new java.awt.event.ActionListener() {
@@ -752,7 +760,24 @@ public class Chess extends javax.swing.JFrame {
         // Resets counters
         clickCount = 0;
         turnCount = 0;
-
+        try{
+        BufferedReader br = new BufferedReader(new FileReader("wins.txt"));
+        if (br.readLine().equals("blackwin")){
+            blackwins ++;
+        }
+        else{
+            whitewins ++;
+        }
+            txtWhiteWins.setText("White wins: " + whitewins);
+            txtBlackWins.setText("Black wins: " + blackwins);
+            br.close();
+        }
+        catch (IOException e){
+            txtWhiteWins.setText("White wins: 0");
+            txtBlackWins.setText("Black wins: 0");
+        }
+      
+       
         // Clears white and black pieces
         whitePlayer.clear();
         blackPlayer.clear();
@@ -1055,10 +1080,28 @@ public class Chess extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(turnCount == 0 || turnCount%2 == 0){
             new blackWins().setVisible(true);
+            try{
+            FileWriter fw = new FileWriter("wins.txt");
+            PrintWriter pw = new PrintWriter(fw);
+            fw.write("blackwin\n");
+            fw.close();
+            }
+            catch (IOException e){
+                System.out.println("something went wrong");
+            }
             this.dispose();
         }
         else{
             new whiteWins().setVisible(true);
+            try{
+            FileWriter fw = new FileWriter("wins.txt");
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println("whitewin");
+            pw.close();
+            }
+            catch (IOException e){
+                System.out.println("something went wrong");
+            }
             this.dispose();
         }
     }//GEN-LAST:event_btnResignActionPerformed
@@ -1144,28 +1187,7 @@ public class Chess extends javax.swing.JFrame {
             selectedPiece.setX(x);
             selectedPiece.setY(y);
 
-            int kingX = 0, kingY = 0;
-            
-            if (turnCount%2 == 0) {
-                for (Piece z : whitePlayer) {
-                    if (z.getClass() == King.class) {
-                        kingX = z.getX();
-                        kingY = z.getY();
-                        break;
-                    }
-                } 
-            } else {
-                for (Piece z : blackPlayer) {
-                    if (z.getClass() == King.class) {
-                        kingX = z.getX();
-                        kingY = z.getY();
-                        break;
-                    }
-                }
-            }
-            
-            if (inCheck(turnCount%2, kingX, kingY)) {
-                
+            if (inCheck(x, y)) {
                 selectedPiece.setX(originalX);
                 selectedPiece.setY(originalY);
                 
@@ -1178,23 +1200,19 @@ public class Chess extends javax.swing.JFrame {
                 }
             } else {
                 if (turnCount%2 == 1) {
-                    labelTurn.setIcon(whiteTurn);
+                    labelTurn.setText(names.WhiteSideName() + "'s turn (White)");
                 } else {
-                    labelTurn.setIcon(blackTurn);
+                    labelTurn.setText(names.BlackSideName() + "'s turn (Black)");
                 }
+                
                 
                 turnCount++;
             }
-            
-            if (inCheckmate()) {
-                 System.out.println("Game over");
-            }
-            
+
+            checkForPromotion();
             
             // Updates board
             updateBoard();
-
-            checkForPromotion();
             
             // Resets clicks to 0
             clickCount = 0;
@@ -1203,33 +1221,50 @@ public class Chess extends javax.swing.JFrame {
             clickCount = 0;
         }
     }
-
     
-    public boolean inCheck(int checkWhite, int x, int y) {
+    public boolean inCheck(int x, int y) {
+        Piece kingPiece = null;
         
-        if (checkWhite == 0) { // white's turn
+        if (selectedPiece.getIsWhite()) {
+            for (Piece z : whitePlayer) {
+                //System.out.println(z.getClass());
+                if (z.getClass() == King.class) {
+                    //System.out.println("yes");
+                    kingPiece = z;
+                    break;
+                }
+            }
+
+            //System.out.println("check " + tempKing.getX() + " " + tempKing.getY());
 
             for (Piece z : blackPlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, x, y)) {
-                    System.out.println("checkW " + x + " " + y);
+                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
+                    System.out.println("checkW " + kingPiece.getX() + " " + kingPiece.getY());
                     return true;
                 }
             }
-            
-        } else { // black's turn
+        } else {
+            for (Piece z : blackPlayer) {
+                //System.out.println(z.getClass());
+                if (z.getClass() == King.class) {
+                    //System.out.println("yes");
+                    kingPiece = z;
+                    break;
+                }
+            }
 
             for (Piece z : whitePlayer) {
                 // check isLegalMove, xPos, yPos, white king
-                if (z.isLegalMove(this, x, y)) {
-                    System.out.println("checkB " + x + " " + y);
+                if (z.isLegalMove(this, kingPiece.getX(), kingPiece.getY())) {
+                    System.out.println("checkB " + kingPiece.getX() + " " + kingPiece.getY());
                     return true;
                 }
             }
         }
+        
         return false;
     }
- 
     
     // Updates board
     public void updateBoard() {
@@ -1408,6 +1443,8 @@ public class Chess extends javax.swing.JFrame {
     private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField labelTurn;
+    private javax.swing.JTextField txtBlackWins;
     private javax.swing.JTextField txtOutput;
+    private javax.swing.JTextField txtWhiteWins;
     // End of variables declaration//GEN-END:variables
 }
