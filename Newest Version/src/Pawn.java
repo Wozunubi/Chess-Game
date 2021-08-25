@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class Pawn extends Piece {
     // Counts the pawns moves
     int count;
+    // Count the pawns turns
+    int turn;
 	
     // Constructor
     public Pawn (int x, int y, boolean isWhite, ImageIcon image) {
@@ -25,7 +27,7 @@ public class Pawn extends Piece {
     
     @Override
     public boolean isLegalMove(Chess chess, int xPos, int yPos) {
-		
+	turn = chess.turnCount;	
         boolean isBlocked = false;
 
         ArrayList<Piece> allPlayer = new ArrayList<Piece>();
@@ -80,7 +82,8 @@ public class Pawn extends Piece {
                     (z.getX() == this.getX() + 1 || z.getX() == this.getX() - 1) && // Check if black pawn is next to capturing pawn
                     z.getY() == this.getY() && // same row
                     (z instanceof Pawn) && // Check if black pawn is in same row as capturing pawn
-                    ((Pawn)z).count == 1) { // Check if it's a pawn's first move
+                    ((Pawn)z).count == 1 && // Check if it's a pawn's first move
+                    (((Pawn)this).turn - ((Pawn)z).turn == 1) ) { // Check if the en passant is done immediately
 
                     // Captures the black pawn
                     chess.blackPlayer.remove(z);
@@ -123,7 +126,8 @@ public class Pawn extends Piece {
                     (z.getX() == this.getX() + 1 || z.getX() == this.getX() - 1) && // Check if white pawn is next to capturing pawn
                     z.getY() == this.getY() && // Check if white pawn is in same row as capturing pawn
                     (z instanceof Pawn) && // Check if it's a pawn
-                    ((Pawn)z).count == 1) { // Check if it's a pawn's first move
+                    ((Pawn)z).count == 1 && // Check if it's a pawn's first move
+                    (((Pawn)this).turn - ((Pawn)z).turn == 1) ) { // Check if the en passant is done immediately
                     
                     // Captures the white pawn
                     chess.whitePlayer.remove(z);
